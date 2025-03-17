@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { SerializerProvider } from '@/context/SerializerContext';
 import Navbar from '@/components/Navbar';
@@ -6,6 +5,8 @@ import FileUpload from '@/components/FileUpload';
 import SerializedView from '@/components/SerializedView';
 import ExportPanel from '@/components/ExportPanel';
 import { motion } from 'framer-motion';
+import { InfoIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   const container = {
@@ -64,6 +65,20 @@ const Index = () => {
                 Visualize, modify, and export PHP serialized data with an intuitive drag-and-drop interface.
                 All processing happens in your browser.
               </motion.p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="mt-3"
+              >
+                <Link 
+                  to="/help"
+                  className="inline-flex items-center text-sm text-purple-600 hover:text-purple-800 transition-colors"
+                >
+                  <InfoIcon className="h-4 w-4 mr-1" />
+                  Need help? Check out our documentation
+                </Link>
+              </motion.div>
             </motion.div>
             
             <motion.div variants={item} className="hover:shadow-purple transition-all duration-300">
