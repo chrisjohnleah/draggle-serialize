@@ -33,6 +33,8 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement;
+    
+    // First remove all theme classes
     root.classList.remove("light", "dark");
 
     if (theme === "system") {
@@ -40,11 +42,36 @@ export function ThemeProvider({
         .matches
         ? "dark"
         : "light";
+      
       root.classList.add(systemTheme);
-      return;
+      
+      // Set data-theme attribute for components that use it
+      root.setAttribute("data-theme", systemTheme);
+    } else {
+      root.classList.add(theme);
+      
+      // Set data-theme attribute for components that use it
+      root.setAttribute("data-theme", theme);
     }
+  }, [theme]);
 
-    root.classList.add(theme);
+  // Listen for system theme changes
+  useEffect(() => {
+    if (theme === "system") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      
+      const handleChange = () => {
+        const root = window.document.documentElement;
+        const systemTheme = mediaQuery.matches ? "dark" : "light";
+        
+        root.classList.remove("light", "dark");
+        root.classList.add(systemTheme);
+        root.setAttribute("data-theme", systemTheme);
+      };
+      
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
   }, [theme]);
 
   const value = {
