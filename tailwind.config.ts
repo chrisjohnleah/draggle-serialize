@@ -129,12 +129,14 @@ export default {
 				'elevated': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
 				'subtle': '0 2px 10px -2px rgba(0, 0, 0, 0.05)',
 				'purple': '0 0 15px -2px rgba(139, 92, 246, 0.3)',
+				'dark-glass': '0 4px 30px rgba(0, 0, 0, 0.3)',
 			},
 			backdropBlur: {
 				'xs': '2px',
 			},
 			backgroundImage: {
 				'gradient-shimmer': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,0) 100%)',
+				'dark-gradient-shimmer': 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.05) 75%, rgba(0,0,0,0) 100%)',
 			},
 		}
 	},

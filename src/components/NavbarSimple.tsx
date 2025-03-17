@@ -7,11 +7,12 @@ import Logo from "./Logo";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NavbarSimple = () => {
   return (
     <motion.header 
-      className="w-full px-6 py-3 border-b bg-white/80 backdrop-blur-md z-10 sticky top-0"
+      className="w-full px-6 py-3 border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-10 sticky top-0"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
@@ -44,7 +45,7 @@ const NavbarSimple = () => {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="flex items-center gap-1 hover:bg-purple-50"
+                  className="flex items-center gap-1 hover:bg-purple-50 dark:hover:bg-purple-950"
                 >
                   <span>Home</span>
                 </Button>
@@ -54,6 +55,8 @@ const NavbarSimple = () => {
               <p>Return to main page</p>
             </TooltipContent>
           </Tooltip>
+
+          <ThemeToggle />
 
           <Tooltip>
             <TooltipTrigger asChild>
@@ -65,7 +68,7 @@ const NavbarSimple = () => {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="flex items-center gap-1 border-purple-200 hover:bg-purple-50 hover:border-purple-300"
+                  className="flex items-center gap-1 border-purple-200 hover:bg-purple-50 hover:border-purple-300 dark:border-purple-800 dark:hover:bg-purple-950 dark:hover:border-purple-700"
                 >
                   <GithubIcon className="h-4 w-4 text-purple-500" />
                   <span>Source</span>
