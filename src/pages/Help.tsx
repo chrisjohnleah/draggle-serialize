@@ -149,14 +149,14 @@ const Help = () => {
                 </p>
                 <div className="bg-gray-100 p-3 rounded-md overflow-x-auto mb-3">
                   <pre className="text-sm text-gray-800">
-                    <code>a:3:{i:0;s:5:"apple";i:1;s:6:"orange";i:2;s:6:"banana";}</code>
+                    <code>{`a:3:{i:0;s:5:"apple";i:1;s:6:"orange";i:2;s:6:"banana";}`}</code>
                   </pre>
                   <p className="text-xs text-gray-500 mt-1">A simple indexed array with three string values</p>
                 </div>
                 
                 <div className="bg-gray-100 p-3 rounded-md overflow-x-auto">
                   <pre className="text-sm text-gray-800">
-                    <code>O:4:"User":3:{s:4:"name";s:5:"Alice";s:3:"age";i:30;s:5:"email";s:15:"alice@mail.com";}</code>
+                    <code>{`O:4:"User":3:{s:4:"name";s:5:"Alice";s:3:"age";i:30;s:5:"email";s:15:"alice@mail.com";}`}</code>
                   </pre>
                   <p className="text-xs text-gray-500 mt-1">A User object with name, age, and email properties</p>
                 </div>
