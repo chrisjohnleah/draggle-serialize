@@ -60,12 +60,28 @@ export const SerializerProvider: React.FC<{ children: ReactNode }> = ({ children
       setIsProcessing(false);
     } catch (error) {
       console.error('Error parsing PHP serialized data:', error);
-      setProcessingError('Invalid PHP serialized data. Please check the format and try again.');
+      
+      // Enhanced error message with more details
+      let errorMessage = 'Invalid PHP serialized data format.';
+      
+      if (error instanceof Error) {
+        errorMessage += ` Error: ${error.message}`;
+      }
+      
+      // Add more specific validation guidance
+      errorMessage += '\n\nCommon issues:';
+      errorMessage += '\n• Incorrect format - PHP serialized data should start with a type identifier (a:, O:, s:, i:, etc.)';
+      errorMessage += '\n• Missing quotes or semicolons';
+      errorMessage += '\n• Mismatched array or object counts';
+      errorMessage += '\n• Invalid character encoding';
+      
+      setProcessingError(errorMessage);
       setParsedData([]);
       setIsProcessing(false);
+      
       toast({
         title: "Error parsing data",
-        description: "The provided PHP serialized data is invalid.",
+        description: "The provided PHP serialized data is invalid. Check the error details below.",
         variant: "destructive"
       });
     }

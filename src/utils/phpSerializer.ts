@@ -7,17 +7,56 @@ const generateId = () => uuidv4();
 
 // Parse a serialized PHP string into a structured format
 export const deserializePhp = (serializedData: string): PhpProperty[] => {
-  // Mock implementation for demonstration purposes
-  // This would be replaced with a proper PHP serialization parser
   try {
-    // Simple validation check
-    if (!serializedData.match(/^(a|O|s|i|b|N|d):/)) {
-      throw new Error('Invalid PHP serialized data format');
+    // Trim the input data to remove any leading/trailing whitespace
+    const trimmedData = serializedData.trim();
+    
+    // Basic format validation
+    if (!trimmedData) {
+      throw new Error("Empty input. PHP serialized data is required.");
     }
-
-    return parsePhpValue(serializedData, null);
+    
+    // Check for basic PHP serialized format patterns
+    const validStartPatterns = /^(a|O|s|i|b|N|d):/;
+    if (!validStartPatterns.test(trimmedData)) {
+      throw new Error(
+        "Invalid PHP serialized format. Data should start with a type identifier (a:, O:, s:, i:, b:, N;, d:)." +
+        "\nExample of valid format: a:2:{i:0;s:5:\"hello\";i:1;i:42;}"
+      );
+    }
+    
+    // Check for common syntax errors
+    if ((trimmedData.match(/{/g) || []).length !== (trimmedData.match(/}/g) || []).length) {
+      throw new Error("Mismatched curly braces. Check your array/object declarations.");
+    }
+    
+    if ((trimmedData.match(/"/g) || []).length % 2 !== 0) {
+      throw new Error("Mismatched quotes. Check your string declarations.");
+    }
+    
+    // For arrays, validate the count matches the declared size
+    if (trimmedData.startsWith('a:')) {
+      const arraySizeMatch = trimmedData.match(/^a:(\d+):/);
+      if (arraySizeMatch) {
+        const declaredSize = parseInt(arraySizeMatch[1], 10);
+        // Count the actual number of elements (this is a simplified check)
+        const estimatedElementCount = (trimmedData.match(/;[^;]*;/g) || []).length;
+        
+        if (declaredSize > 0 && estimatedElementCount === 0) {
+          throw new Error(
+            `Array declares size ${declaredSize} but appears to be empty or improperly formatted.`
+          );
+        }
+      }
+    }
+    
+    return parsePhpValue(trimmedData, null);
   } catch (error) {
-    console.error('Error parsing PHP serialized data:', error);
+    if (error instanceof Error) {
+      console.error('PHP Parser Error:', error.message);
+      // Re-throw with more context
+      throw new Error(`PHP Serialization Error: ${error.message}`);
+    }
     throw error;
   }
 };

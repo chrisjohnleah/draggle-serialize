@@ -1,5 +1,6 @@
+
 import React, { useRef, useState } from 'react';
-import { UploadIcon, FileIcon, ClipboardIcon, FileCodeIcon } from 'lucide-react';
+import { UploadIcon, FileIcon, ClipboardIcon, FileCodeIcon, AlertCircleIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -148,8 +149,12 @@ const FileUpload: React.FC = () => {
         )}
         
         {processingError && (
-          <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-            {processingError}
+          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm overflow-auto max-h-[300px]">
+            <div className="flex items-start gap-2 mb-2">
+              <AlertCircleIcon className="h-5 w-5 mt-0.5 flex-shrink-0" />
+              <h3 className="font-medium">Error Parsing PHP Serialized Data</h3>
+            </div>
+            <pre className="whitespace-pre-wrap font-mono text-xs mt-2">{processingError}</pre>
           </div>
         )}
       </CardContent>
