@@ -1,34 +1,97 @@
 
-import { GithubIcon, InfoIcon, FileIcon } from "lucide-react";
+import { GithubIcon, InfoIcon, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSerializer } from "@/context/SerializerContext";
+import { motion } from "framer-motion";
+import Logo from "./Logo";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
   const { resetData } = useSerializer();
 
   return (
-    <header className="w-full px-6 py-4 border-b bg-white/80 backdrop-blur-sm z-10 sticky top-0">
+    <motion.header 
+      className="w-full px-6 py-3 border-b bg-white/80 backdrop-blur-md z-10 sticky top-0"
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-xl">PHP Serializer</span>
-          <div className="text-xs px-2 py-0.5 bg-secondary rounded-full">Beta</div>
-        </div>
+        <motion.div 
+          className="flex items-center gap-3"
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+        >
+          <Logo size="md" />
+          <div>
+            <span className="font-semibold text-xl bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">PHP Serializer</span>
+            <Badge className="ml-2 bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700">Beta</Badge>
+          </div>
+        </motion.div>
         
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={resetData}>
-            New
-          </Button>
-          <Button variant="outline" size="sm" className="gap-1">
-            <InfoIcon className="h-4 w-4" />
-            <span>Help</span>
-          </Button>
-          <Button variant="outline" size="sm" className="gap-1">
-            <GithubIcon className="h-4 w-4" />
-            <span>Source</span>
-          </Button>
-        </div>
+        <motion.div 
+          className="flex items-center gap-3"
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.4 }}
+        >
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={resetData}
+                className="flex items-center gap-1 hover:bg-purple-50"
+              >
+                <RefreshCw className="h-4 w-4" />
+                <span>New</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Reset to start fresh</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="flex items-center gap-1 border-purple-200 hover:bg-purple-50 hover:border-purple-300"
+              >
+                <InfoIcon className="h-4 w-4 text-purple-500" />
+                <span>Help</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>View documentation</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="flex items-center gap-1 border-purple-200 hover:bg-purple-50 hover:border-purple-300"
+                as="a"
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon className="h-4 w-4 text-purple-500" />
+                <span>Source</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>View source code</p>
+            </TooltipContent>
+          </Tooltip>
+        </motion.div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 
