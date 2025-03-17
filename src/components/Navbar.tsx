@@ -72,18 +72,20 @@ const Navbar = () => {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="flex items-center gap-1 border-purple-200 hover:bg-purple-50 hover:border-purple-300"
-                as="a"
+              <a 
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <GithubIcon className="h-4 w-4 text-purple-500" />
-                <span>Source</span>
-              </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="flex items-center gap-1 border-purple-200 hover:bg-purple-50 hover:border-purple-300"
+                >
+                  <GithubIcon className="h-4 w-4 text-purple-500" />
+                  <span>Source</span>
+                </Button>
+              </a>
             </TooltipTrigger>
             <TooltipContent>
               <p>View source code</p>
