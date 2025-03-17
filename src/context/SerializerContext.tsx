@@ -58,22 +58,50 @@ export const SerializerProvider: React.FC<{ children: ReactNode }> = ({ children
       const parsed = deserializePhp(data);
       setParsedData(parsed);
       setIsProcessing(false);
+      
+      // Success notification
+      toast({
+        title: "Data parsed successfully",
+        description: `${parsed.length} top-level items were found in the serialized data.`,
+      });
     } catch (error) {
       console.error('Error parsing PHP serialized data:', error);
       
-      // Enhanced error message with more details
+      // Build a comprehensive error message
       let errorMessage = 'Invalid PHP serialized data format.';
       
       if (error instanceof Error) {
         errorMessage += ` Error: ${error.message}`;
       }
       
+      // Add specific error identification
+      const dataPreview = data.substring(0, 50) + (data.length > 50 ? '...' : '');
+      errorMessage += `\n\nData preview: "${dataPreview}"`;
+      
+      // Common error patterns
+      if (data.startsWith('{') || data.startsWith('[')) {
+        errorMessage += `\n\nThis appears to be JSON, not PHP serialized data. PHP serialized data typically starts with a type identifier such as "a:", "O:", "s:", "i:", etc.`;
+      }
+      else if (data.includes('<?php')) {
+        errorMessage += `\n\nThis appears to be PHP code, not serialized data. Please provide the output of serialize() instead.`;
+      }
+      else if (!/^[a-z]:[0-9]+:/.test(data)) {
+        errorMessage += `\n\nThe data doesn't follow the PHP serialized format pattern. PHP serialized data typically starts with a type identifier followed by a colon and length.`;
+      }
+      
       // Add more specific validation guidance
       errorMessage += '\n\nCommon issues:';
       errorMessage += '\n• Incorrect format - PHP serialized data should start with a type identifier (a:, O:, s:, i:, etc.)';
-      errorMessage += '\n• Missing quotes or semicolons';
+      errorMessage += '\n• Missing or mismatched quotes/semicolons';
       errorMessage += '\n• Mismatched array or object counts';
-      errorMessage += '\n• Invalid character encoding';
+      errorMessage += '\n• Invalid character encoding or control characters';
+      errorMessage += '\n• Truncated data - the serialized string may be incomplete';
+      
+      // Suggestion for fixing
+      errorMessage += '\n\nSuggestions:';
+      errorMessage += '\n• Verify the data was generated using PHP\'s serialize() function';
+      errorMessage += '\n• Check if the data was properly transmitted (not URL encoded, base64 encoded, etc.)';
+      errorMessage += '\n• Try using the "Load Example" button to see a valid format example';
       
       setProcessingError(errorMessage);
       setParsedData([]);
@@ -117,6 +145,12 @@ export const SerializerProvider: React.FC<{ children: ReactNode }> = ({ children
       
       if (property && parent) {
         parent[index] = { ...property, ...updates };
+        
+        // Show feedback toast on property update
+        toast({
+          title: "Property updated",
+          description: `Property "${property.key}" has been updated successfully.`,
+        });
       }
       
       return newData;
@@ -139,6 +173,12 @@ export const SerializerProvider: React.FC<{ children: ReactNode }> = ({ children
           const [removed] = dragParent.splice(dragIndex, 1);
           // Insert at the new position
           dragParent.splice(hoverIndex, 0, removed);
+          
+          // Show feedback toast on successful move
+          toast({
+            title: "Item reordered",
+            description: `Successfully reordered "${dragItem.key}" property.`,
+          });
         }
       }
       
@@ -164,7 +204,12 @@ export const SerializerProvider: React.FC<{ children: ReactNode }> = ({ children
 
   const exportData = () => {
     try {
-      return serializePhp(parsedData);
+      const serialized = serializePhp(parsedData);
+      toast({
+        title: "Data exported successfully",
+        description: "The modified structure has been converted back to PHP serialized format.",
+      });
+      return serialized;
     } catch (error) {
       console.error('Error serializing data:', error);
       toast({
@@ -180,6 +225,10 @@ export const SerializerProvider: React.FC<{ children: ReactNode }> = ({ children
     setSerializedData('');
     setParsedData([]);
     setProcessingError(null);
+    toast({
+      title: "Data reset",
+      description: "All data has been cleared. You can start fresh now.",
+    });
   };
 
   const value = {
