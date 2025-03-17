@@ -1,6 +1,5 @@
-
 import React, { useRef, useState } from 'react';
-import { UploadIcon, FileIcon, PasteIcon, FileCodeIcon } from 'lucide-react';
+import { UploadIcon, FileIcon, ClipboardIcon, FileCodeIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,7 +17,6 @@ const FileUpload: React.FC = () => {
     const file = event.target.files?.[0];
     if (!file) return;
     
-    // Check file type
     if (!file.name.endsWith('.txt') && !file.name.endsWith('.php')) {
       toast({
         title: "Invalid file type",
@@ -142,7 +140,7 @@ const FileUpload: React.FC = () => {
               onClick={handlePaste}
               className="flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg hover:bg-secondary/50 cursor-pointer transition-colors animate-fade-in"
             >
-              <PasteIcon className="h-8 w-8 text-muted-foreground mb-3" />
+              <ClipboardIcon className="h-8 w-8 text-muted-foreground mb-3" />
               <p className="text-sm font-medium">Paste from Clipboard</p>
               <p className="text-xs text-muted-foreground mt-1">Paste serialized data from clipboard</p>
             </div>

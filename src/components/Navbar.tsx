@@ -1,5 +1,5 @@
 
-import { ButtonIcon, GithubIcon, InfoIcon } from "lucide-react";
+import { GithubIcon, InfoIcon, FileIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSerializer } from "@/context/SerializerContext";
 
