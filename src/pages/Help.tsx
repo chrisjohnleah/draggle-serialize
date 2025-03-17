@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Navbar from '@/components/Navbar';
 import { 
   CircleHelp, 
   FileQuestion, 
@@ -41,6 +42,7 @@ const Help = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 via-purple-50/20 to-gray-100">
+      <Navbar />
       <main className="flex-1 container mx-auto px-4 py-6">
         <motion.div 
           className="max-w-4xl mx-auto"
@@ -58,7 +60,7 @@ const Help = () => {
               PHP Serializer Help Documentation
             </motion.h1>
             <motion.p className="text-muted-foreground max-w-2xl mx-auto">
-              Learn how to use the PHP Serialization Visualizer tool effectively
+              Learn how to use this free, open-source PHP Serialization Visualizer tool
             </motion.p>
           </motion.div>
 
@@ -165,15 +167,16 @@ const Help = () => {
               <motion.section variants={item} className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-sm border border-purple-100">
                 <h2 className="text-2xl font-semibold flex items-center text-purple-800 mb-4">
                   <MessageCircleQuestion className="mr-2" size={24} />
-                  Additional Support
+                  Contributing & Support
                 </h2>
                 <p className="text-gray-700 mb-3">
-                  If you encounter issues or have questions about the PHP Serialization Visualizer:
+                  This is a free, open-source tool for anyone to use and contribute to. If you encounter issues or have questions:
                 </p>
                 <ul className="list-disc pl-6 text-gray-700 space-y-2">
                   <li>Visit our GitHub repository for the latest updates and documentation</li>
                   <li>Submit issues through the GitHub issue tracker</li>
                   <li>Contribute to the project by submitting pull requests</li>
+                  <li>Help improve the tool by sharing feedback and suggestions</li>
                 </ul>
                 <div className="mt-4">
                   <a 
@@ -198,7 +201,7 @@ const Help = () => {
         transition={{ delay: 0.8, duration: 0.5 }}
       >
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>PHP Serialization Visualizer - Frontend Tool</p>
+          <p>PHP Serialization Visualizer - Free Open Source Tool</p>
           <p className="text-xs mt-1">All data processing happens in your browser. No server processing required.</p>
           <div className="text-xs mt-2">
             <a 
