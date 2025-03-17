@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/NavbarSimple';
 import { 
   CircleHelp, 
   FileQuestion, 
