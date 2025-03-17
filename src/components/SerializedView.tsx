@@ -54,7 +54,7 @@ const SerializedView: React.FC = () => {
   }
 
   return (
-    <Card className="w-full mb-8 animate-fade-in">
+    <Card className="w-full animate-fade-in">
       <CardHeader>
         <CardTitle className="text-xl">PHP Serialized Structure</CardTitle>
         <CardDescription>

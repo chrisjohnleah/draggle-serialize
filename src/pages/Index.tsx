@@ -27,7 +27,7 @@ const Index = () => {
         <Navbar />
         
         <motion.main 
-          className="flex-1 container mx-auto px-4 py-8 space-y-8"
+          className="flex-1 container mx-auto px-4 py-8"
           initial="hidden"
           animate="visible"
           variants={{
@@ -41,7 +41,7 @@ const Index = () => {
             }
           }}
         >
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-6">
             <motion.div 
               className="mb-8 text-center"
               variants={fadeInUp}
@@ -60,18 +60,18 @@ const Index = () => {
               <FileUpload />
             </motion.div>
             
-            <motion.div variants={fadeInUp} custom={3}>
+            <motion.div variants={fadeInUp} custom={3} className="pt-2">
               <SerializedView />
             </motion.div>
             
-            <motion.div variants={fadeInUp} custom={4}>
+            <motion.div variants={fadeInUp} custom={4} className="pt-2">
               <ExportPanel />
             </motion.div>
           </div>
         </motion.main>
         
         <motion.footer 
-          className="border-t py-6 bg-white/80 backdrop-blur-sm"
+          className="border-t py-6 bg-white/80 backdrop-blur-sm mt-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.5 }}
