@@ -25,5 +25,21 @@ export default defineConfig(({ mode }) => ({
     outDir: "dist",
     minify: true,
     sourcemap: false,
+    // Add rollup options to better handle dependencies
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-toast',
+            'class-variance-authority',
+            'clsx',
+            'tailwind-merge'
+          ]
+        }
+      }
+    }
   },
 }));
