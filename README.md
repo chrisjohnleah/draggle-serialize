@@ -66,6 +66,4 @@ This is a free, open-source tool for anyone to use and contribute to. Contributi
 
 MIT
 
-## Project URL
 
-Visit the live project: [PHP Serialization Visualizer](https://lovable.dev/projects/095d69f4-899c-4c07-a1de-873a341b3786)
