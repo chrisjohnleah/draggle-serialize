@@ -3,8 +3,6 @@
 
 A free, open-source tool for visualizing, modifying, and exporting PHP serialized data with an intuitive drag-and-drop interface.
 
-![PHP Serialization Visualizer](public/og-image.png)
-
 ## Features
 
 - **Visual Serialization**: Convert PHP serialized data into an interactive, hierarchical tree structure.
